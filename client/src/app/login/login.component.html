@@ -1,0 +1,25 @@
+<div class="page">
+    <img src="./../../assets/logo.svg" class="center" height=150px>
+    <div class="part container">
+        <span class="login100-form-title p-b-26">
+            HỆ THỐNG <br> CHẤM ĐIỂM BÀI THỂ DỤC
+        </span>
+
+        <form [formGroup]="account" (ngSubmit)="signIn()" enctype="multipart/form-data">
+            <div class="cross-validation">
+                <label for="name"><b>Tên người dùng</b></label>
+
+                <input class="input100 form-control" id="name" name="username" type="text" formControlName="username">
+
+                <label for="password"><b>Mật khẩu</b></label>
+
+                <input class="input100 form-control" id="password" name="password" type="password"
+                    formControlName="password">
+            </div>
+            <button class="btn pink" type="submit">ĐĂNG NHẬP</button>
+        </form>
+
+    </div>
+    
+</div>
+
