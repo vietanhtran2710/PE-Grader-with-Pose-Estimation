@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject } from 'rxjs';
 import { AccountService } from '../services/account.service'
 import { map } from 'rxjs/operators';
+import { Account } from '../_model/account'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private currentAccountSubject: BehaviorSubject<Account>;
-  private apiUrl = 'http://localhost:8080/api/accounts'
+  private apiUrl = 'http://localhost:8080/api/account'
 
   constructor(private http: HttpClient, private accountService: AccountService) {
     this.currentAccountSubject = new BehaviorSubject<Account>(JSON.parse(localStorage.getItem('currentAccount')));

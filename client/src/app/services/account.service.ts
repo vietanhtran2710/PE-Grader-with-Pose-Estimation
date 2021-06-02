@@ -34,8 +34,8 @@ export class AccountService {
   }
 
   updateAccount(username, data) {
-    const salt: string = bcrypt.genSaltSync(10);
-    data.password = bcrypt.hashSync(data.password, salt)
+    // const salt: string = bcrypt.genSaltSync(10);
+    // data.password = bcrypt.hashSync(data.password, salt)
     return this.http.put(`${baseUrl}/${username}`, data);
   }
 }
