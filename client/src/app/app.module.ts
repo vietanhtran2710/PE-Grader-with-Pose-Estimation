@@ -8,12 +8,14 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,165 @@
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+        <img
+        src="./../../assets/logo.svg"
+        class="me-2"
+        height="20"
+        alt=""
+        loading="lazy"
+        />
+        <h3>Trang quản trị của Admin</h3>
+    </a>
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Đăng xuất</a>
+        </li>
+      </ul>
+    </div>
+</nav>
+<div class="container">
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-12 col-xl-12 mx-auto">
+        <!-- Image and text -->
+        <div class="my-4">
+            <form>
+
+                <div class="row mt-5 align-items-center">
+                    <h4>Tạo tài khoản sinh viên</h4>
+                </div>
+                <hr class="my-4" />
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="id">Mã sinh viên</label>
+                            <input type="text" class="form-control" id="id" />
+                        </div>
+                        <div class="form-group">
+                            <label for="fullName">Họ và tên</label>
+                            <input type="text" class="form-control" id="fullName" />
+                        </div>
+                        <div class="form-group">
+                            <label for="university">Trường</label>
+                            <select class="form-control" id="university">
+                                <option>TRƯỜNG ĐẠI HỌC Y DƯỢC (VNU-UMP)</option>
+                                <option>TRƯỜNG ĐẠI HỌC KHOA HỌC XÃ HỘI VÀ NHÂN VĂN (VNU-USSH)</option>
+                                <option>TRƯỜNG ĐẠI HỌC KHOA HỌC TỰ NHIÊN (VNU-HUS)</option>
+                                <option>TRƯỜNG ĐẠI HỌC CÔNG NGHỆ (VNU-UET)</option>
+                                <option>TRƯỜNG ĐẠI HỌC NGOẠI NGỮ (VNU-ULIS)</option>
+                                <option>TRƯỜNG ĐẠI HỌC KINH TẾ (VNU-UEB)</option>
+                                <option>TRƯỜNG ĐẠI HỌC GIÁO DỤC (VNU-UED)</option>
+                                <option>TRƯỜNG ĐẠI HỌC VIỆT NHẬT (VNU-VJU)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">Số điện thoại</label>
+                            <input type="number" class="form-control" id="phoneNumber" />
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Ngày tháng năm sinh</label>
+                            <input type="date" class="form-control" id="dob" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Tạo tài khoản</button>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="file">Chọn file dữ liệu</label>
+                            <input type="file" class="form-control-file" id="file" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Tạo tài khoản hàng loạt</button>
+                    </div>
+                </div>
+
+                <div class="row mt-5 align-items-center">
+                    <h4>Tạo tài khoản giáo viên</h4>
+                </div>
+                <hr class="my-4" />
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="username">Tên tài khoản</label>
+                            <input type="text" class="form-control" id="id" />
+                        </div>
+                        <div class="form-group">
+                            <label for="teacherFullName">Họ và tên</label>
+                            <input type="text" class="form-control" id="fullName" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" />
+                        </div>
+                        <div class="form-group">
+                            <label for="teacherPhoneNumber">Số điện thoại</label>
+                            <input type="number" class="form-control" id="teacherPhoneNumber" />
+                        </div>
+                        <div class="form-group">
+                            <label for="teacherDob">Ngày tháng năm sinh</label>
+                            <input type="date" class="form-control" id="teacherDob" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Tạo tài khoản</button>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="teacherFile">Chọn file dữ liệu</label>
+                            <input type="file" class="form-control-file" id="teacherFile" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Tạo tài khoản hàng loạt</button>
+                    </div>
+                </div>
+
+                <div class="row mt-5 align-items-center">
+                    <h4>Tạo lớp</h4>
+                </div>
+                <hr class="my-4" />
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="username">Mã lớp</label>
+                            <input type="text" class="form-control" id="id" />
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Môn học</label>
+                            <input type="text" class="form-control" id="subject" />
+                        </div>
+                        <div class="form-group">
+                            <label for="classday">Ngày học</label>
+                            <select class="form-control" id="classday">
+                                <option></option>
+                                <option>Thứ hai</option>
+                                <option>Thứ ba</option>
+                                <option>Thứ tư</option>
+                                <option>Thứ năm</option>
+                                <option>Thứ sáu</option>
+                                <option>Thứ bảy</option>
+                                <option>Chủ Nhật</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="classtime">Giờ học</label>
+                            <input type="time" class="form-control" id="classtime" />
+                        </div>
+                        <div class="form-group">
+                            <label for="teacher">Giáo viên</label>
+                            <select class="form-control" id="teacher">
+                                <option>1</option>
+                                <option>2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="teacherFile">Chọn file danh sách lớp</label>
+                            <input type="file" class="form-control-file" id="teacherFile" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Tạo lớp học</button>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<app-footer></app-footer>
