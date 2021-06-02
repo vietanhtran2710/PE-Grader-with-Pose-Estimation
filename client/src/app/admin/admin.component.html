@@ -32,15 +32,18 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="id">Mã sinh viên</label>
-                            <input type="text" class="form-control" id="id" />
+                            <input type="text" class="form-control" id="id" 
+                            [(ngModel)]=studentData.id #studentId="ngModel" name="studentId"/>
                         </div>
                         <div class="form-group">
                             <label for="fullName">Họ và tên</label>
-                            <input type="text" class="form-control" id="fullName" />
+                            <input type="text" class="form-control" id="fullName" 
+                            [(ngModel)]=studentData.fullName #studentFullName="ngModel" name="studentFullName"/>
                         </div>
                         <div class="form-group">
                             <label for="university">Trường</label>
-                            <select class="form-control" id="university">
+                            <select class="form-control" id="university" 
+                            [(ngModel)]=studentData.university #studentUniveristy="ngModel" name="studentUniversity">
                                 <option>TRƯỜNG ĐẠI HỌC Y DƯỢC (VNU-UMP)</option>
                                 <option>TRƯỜNG ĐẠI HỌC KHOA HỌC XÃ HỘI VÀ NHÂN VĂN (VNU-USSH)</option>
                                 <option>TRƯỜNG ĐẠI HỌC KHOA HỌC TỰ NHIÊN (VNU-HUS)</option>
@@ -53,13 +56,15 @@
                         </div>
                         <div class="form-group">
                             <label for="phoneNumber">Số điện thoại</label>
-                            <input type="number" class="form-control" id="phoneNumber" />
+                            <input type="text" class="form-control" id="phoneNumber" 
+                            [(ngModel)]=studentData.phoneNumber #studentPhoneNumber="ngModel" name="studentPhoneNumber"/>
                         </div>
                         <div class="form-group">
                             <label for="dob">Ngày tháng năm sinh</label>
-                            <input type="date" class="form-control" id="dob" />
+                            <input type="date" class="form-control" id="dob" 
+                            [(ngModel)]=studentData.dateOfBirth #studentDateOfBirth="ngModel" name="studentDateOfBirth"/>
                         </div>
-                        <button type="submit" class="btn btn-primary">Tạo tài khoản</button>
+                        <button type="submit" (click)="createStudent()" class="btn btn-primary">Tạo tài khoản</button>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
@@ -83,25 +88,30 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="username">Tên tài khoản</label>
-                            <input type="text" class="form-control" id="id" />
+                            <input type="text" class="form-control" id="id" 
+                            [(ngModel)]=teacherData.accountUsername #teacherUsername="ngModel" name="teacherUsername"/>
                         </div>
                         <div class="form-group">
                             <label for="teacherFullName">Họ và tên</label>
-                            <input type="text" class="form-control" id="fullName" />
+                            <input type="text" class="form-control" id="fullName" 
+                            [(ngModel)]=teacherData.fullName #teacherFullName="ngModel" name="teacherFullName"/>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" />
+                            <input type="email" class="form-control" id="email" 
+                            [(ngModel)]=teacherData.email #teacherEmail="ngModel" name="teacherEmail"/>
                         </div>
                         <div class="form-group">
                             <label for="teacherPhoneNumber">Số điện thoại</label>
-                            <input type="number" class="form-control" id="teacherPhoneNumber" />
+                            <input type="number" class="form-control" id="teacherPhoneNumber" 
+                            [(ngModel)]=teacherData.phoneNumber #teacherPhoneNumber="ngModel" name="teacherPhoneNumber"/>
                         </div>
                         <div class="form-group">
                             <label for="teacherDob">Ngày tháng năm sinh</label>
-                            <input type="date" class="form-control" id="teacherDob" />
+                            <input type="date" class="form-control" id="teacherDob" 
+                            [(ngModel)]=teacherData.dateOfBirth #teacherDateOfBirth="ngModel" name="teacherDateOfBirth"/>
                         </div>
-                        <button type="submit" class="btn btn-primary">Tạo tài khoản</button>
+                        <button type="submit" (click)="createTeacher()" class="btn btn-primary">Tạo tài khoản</button>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
@@ -125,15 +135,18 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="username">Mã lớp</label>
-                            <input type="text" class="form-control" id="id" />
+                            <input type="text" class="form-control" id="id" 
+                            [(ngModel)]=classData.id #classId="ngModel" name="classId"/>
                         </div>
                         <div class="form-group">
                             <label for="subject">Môn học</label>
-                            <input type="text" class="form-control" id="subject" />
+                            <input type="text" class="form-control" id="subject" 
+                            [(ngModel)]=classData.subject #classSubject="ngModel" name="classSubject"/>
                         </div>
                         <div class="form-group">
                             <label for="classday">Ngày học</label>
-                            <select class="form-control" id="classday">
+                            <select class="form-control" id="classday"
+                            [(ngModel)]=classData.day #classDay="ngModel" name="classDay">
                                 <option></option>
                                 <option>Thứ hai</option>
                                 <option>Thứ ba</option>
@@ -146,11 +159,13 @@
                         </div>
                         <div class="form-group">
                             <label for="classtime">Giờ học</label>
-                            <input type="time" class="form-control" id="classtime" />
+                            <input type="time" class="form-control" id="classtime" 
+                            [(ngModel)]=classData.time #classTime="ngModel" name="classTime"/>
                         </div>
                         <div class="form-group">
                             <label for="teacher">Giáo viên</label>
-                            <select class="form-control" id="teacher">
+                            <select class="form-control" id="teacher"
+                            [(ngModel)]=classData.teacherName #classTeacher="ngModel" name="classTeacher">
                                 <option>1</option>
                                 <option>2</option>
                             </select>
@@ -162,7 +177,7 @@
                             <input type="file" class="form-control-file" id="teacherFile" />
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary">Tạo lớp học</button>
+                            <button type="submit" (click)="createClass()" class="btn btn-primary">Tạo lớp học</button>
                         </div>
                         <div>
                             <button type="submit" class="btn btn-secondary">Xem danh sách các lớp học</button>
