@@ -3,7 +3,6 @@ module.exports = (sequelize, DataTypes) => {
         id: {
             type: DataTypes.STRING(20),
             primaryKey: true,
-            autoIncrement: true
         },
         weekDay: {
             type: DataTypes.STRING(10)

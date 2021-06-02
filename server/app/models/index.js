@@ -16,19 +16,19 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 });
 
 account = require('./account.model')(sequelize, Sequelize)
-_class = require('./class.model')(sequelize, DataTypes)
+_class = require('./classes.model')(sequelize, DataTypes)
 pose = require('./pose.model')(sequelize, DataTypes)
 post = require('./post.model')(sequelize, DataTypes)
 student = require('./student.model')(sequelize, DataTypes)
 teacher = require('./teacher.model')(sequelize, DataTypes)
 
-account.hasMany(this.student)
-account.hasMany(this.teacher)
+account.hasMany(student)
+account.hasMany(teacher)
 
-_class.hasMany(this.student)
-teacher.hasMany(this._class)
-_class.hasMany(this.post)
-teacher.hasMany(this.post)
+_class.hasMany(student)
+teacher.hasMany(_class)
+_class.hasMany(post)
+teacher.hasMany(post)
 
 const db = {
     account,

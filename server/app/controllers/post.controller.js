@@ -34,23 +34,27 @@ exports.findAll = async (req, res) => {
     const title = req.query.title;
     var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
-    Post.findAll({ where: condition })
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving posts."
-            });
+    Post.findAll({ 
+        where: condition,
+        order: [ ['updatedAt',  'DESC'] ]
+    })
+    .then(data => {
+        res.send(data);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message:
+                err.message || "Some error occurred while retrieving posts."
         });
+    });
 };
 
 exports.findByClass = async (req, res) => {
     const classId = req.params.id;
 
-    Class.findAll({
-        where: { classId: classId}
+    Post.findAll({
+        where: { classId: classId},
+        order: [ ['updatedAt',  'DESC'] ]
     })
     .then(data => {
         res.send(data);
@@ -65,8 +69,9 @@ exports.findByClass = async (req, res) => {
 exports.findByTeacher = async (req, res) => {
     const teacherId = req.params.id;
 
-    Class.findAll({
-        where: { teacherId: teacherId}
+    Post.findAll({
+        where: { teacherId: teacherId},
+        order: [ ['updatedAt',  'DESC'] ]
     })
     .then(data => {
         res.send(data);
@@ -81,8 +86,8 @@ exports.findByTeacher = async (req, res) => {
 exports.deleteOne = async (req, res) => {
     const id = req.params.id;
 
-    Class.destroy({
-        where: { id: id }
+    Post.destroy({
+        where: { postId: id }
     })
     .then(num => {
         if (num == 1) {
@@ -124,7 +129,7 @@ exports.deleteByClass = async (req, res) => {
 exports.deleteByTeacher = async (req, res) => {
     const teacherId = req.params.id;
 
-    Pose.destroy({
+    Post.destroy({
         where: { teacherId: teacherId },
         truncate: false
     })
@@ -140,7 +145,7 @@ exports.deleteByTeacher = async (req, res) => {
 };
 
 exports.deleteAll = async (req, res) => {
-    Pose.destroy({
+    Post.destroy({
         where: {},
         truncate: false
     })
@@ -158,7 +163,7 @@ exports.deleteAll = async (req, res) => {
 exports.edit = async (req, res) => {
     const id = req.params.id;
 
-    Class.update(req.body, {
+    Post.update(req.body, {
         where: { postID: id }
     })
     .then(num => {

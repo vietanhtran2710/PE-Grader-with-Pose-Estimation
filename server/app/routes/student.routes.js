@@ -7,7 +7,7 @@ module.exports = app => {
     // Create a new student
     router.post("/", student.create);
     
-    // Retrieve all stdents
+    // Retrieve all students
     router.get("/", student.findAll);
 
     // Retrieve all student in a class
@@ -17,10 +17,10 @@ module.exports = app => {
     router.get("/:id", student.findOne);
   
     // Delete a student by id
-    router.delete("/:id", post.deleteOne);
+    router.delete("/:id", student.deleteOne);
 
     // Delete all students in a class
-    router.delete("/class/:id", post.deleteByClass);
+    router.delete("/class/:id", student.deleteByClass);
   
     // Delete all students
     router.delete("/", student.deleteAll)

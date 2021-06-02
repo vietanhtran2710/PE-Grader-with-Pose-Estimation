@@ -3,7 +3,7 @@ const Class = db._class;
 
 exports.create = async (req, res) => {
     // Validate request
-    if (!req.body.weekDay || !req.body.startTime || !req.body.subject || !req.body.teacherId) {
+    if (!req.body.weekDay || !req.body.startTime || !req.body.subject || !req.body.teacherId || !req.body.id) {
         res.status(400).send({
             message: "A content properties cannot by empty"
         })
@@ -11,6 +11,7 @@ exports.create = async (req, res) => {
 
     // Create a class
     const _class = {
+        id: req.body.id,
         weekDay: req.body.weekDay,
         startTime: req.body.startTime,
         subject: req.body.subject,

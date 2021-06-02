@@ -22,7 +22,7 @@ module.exports = app => {
     // Delete all post in a class
     router.delete("/class/:id", post.deleteByClass);
 
-    // Delete all post in a class
+    // Delete all post by a teacher
     router.delete("/teacher/:id", post.deleteByTeacher);
   
     // Delete all posts

@@ -115,13 +115,13 @@ exports.edit = async (req, res) => {
         } 
         else {
             res.send({
-                message: `Cannot update account with id = ${id}. Maybe account was not found or req.body is empty!`
+                message: `Cannot update account with username = ${username}. Maybe account was not found or req.body is empty!`
             });
         }
     })
     .catch(err => {
         res.status(500).send({
-            message: "Error updating account with id = " + id
+            message: "Error updating account with username = " + username
         });
     });
 };

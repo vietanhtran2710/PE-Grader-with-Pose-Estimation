@@ -3,7 +3,7 @@ const Student = db.student;
 
 exports.create = async (req, res) => {
     // Validate request
-    if (!req.body.id || !req.body.fullName || !req.body.university || !req.body.email || !req.body.phoneNumber || !req.body.dateOfBirth) {
+    if (!req.body.id || !req.body.fullName || !req.body.university || !req.body.email || !req.body.phoneNumber || !req.body.dateOfBirth || !req.body.username) {
         res.status(400).send({
             message: "A content properties cannot by empty"
         })
@@ -11,6 +11,7 @@ exports.create = async (req, res) => {
 
     // Create a class
     const student = {
+        accountUsername: req.body.username,
         id: req.body.id,
         fullName: req.body.fullName,
         university: req.body.university,
@@ -20,7 +21,7 @@ exports.create = async (req, res) => {
     }
 
     // Save a class in the database
-    Student.create(_class)
+    Student.create(student)
         .then(data => {
             res.send(data);
         })
