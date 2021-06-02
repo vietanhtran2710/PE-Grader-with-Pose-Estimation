@@ -10,13 +10,15 @@ import { LoginComponent } from './login/login.component';
 
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AdminComponent } from './admin/admin.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
     LoginComponent,
-    AdminComponent
+    AdminComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
