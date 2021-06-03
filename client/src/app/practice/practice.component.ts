@@ -43,7 +43,7 @@ export class PracticeComponent implements OnInit {
   public imgBtnStatus: boolean = true;
   public webBtnStatus: boolean = false;
   public imageElement: any;
-  public imageSrc: any = 'assets/pose1.jpg';
+  public imageSrc: any = 'assets/white.jpg';
   public imageWidth: number = 410;
   public imageHeight: number = 310;
   @ViewChild('videoElement', {static: false}) videoElement: ElementRef;
@@ -64,6 +64,9 @@ export class PracticeComponent implements OnInit {
   public snapData: any;
   public videoCanvasEnable: boolean = true;
 
+  imgSrcLists = ['assets/pose1.jpg', 'assets/pose2.jpg', 'assets/pose3.jpg'];
+  imgIndex = 2;
+
   public async ngOnInit() {
     this.model = await posenet.load();
     this.modelLoaded = true;
@@ -78,7 +81,6 @@ export class PracticeComponent implements OnInit {
       cancelAnimationFrame(this.animationFrame);
       this.videoCanvasEnable = true;
       this.fileName = 'No File Chosen';
-      //this.imageSrc = 'assets/white.jpg';
       this.webBtnStatus = true;
       this.imgBtnStatus = false;
       this.snapData = null;
@@ -137,6 +139,7 @@ export class PracticeComponent implements OnInit {
   }
 
   public async realTimeVideo() {
+    this.imageSrc = this.imgSrcLists[this.imgIndex];
     this.videoPic = false;
     if (this.videoCanvasEnable) {
       if (this.pose === 'single-person') {

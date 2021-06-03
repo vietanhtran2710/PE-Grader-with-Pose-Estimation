@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { PracticeComponent } from './practice/practice.component';
 import { ClassComponent } from './class/class.component';
 import { TeacherComponent } from './teacher/teacher.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { TeacherComponent } from './teacher/teacher.component';
     HomeComponent,
     PracticeComponent,
     ClassComponent,
-    TeacherComponent
+    TeacherComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
