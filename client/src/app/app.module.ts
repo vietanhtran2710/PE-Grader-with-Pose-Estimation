@@ -15,6 +15,9 @@ import { PracticeComponent } from './practice/practice.component';
 import { ClassComponent } from './class/class.component';
 import { TeacherComponent } from './teacher/teacher.component';
 import { TestComponent } from './test/test.component';
+import { StudentListComponent } from './student-list/student-list.component';
+import { TeacherListComponent } from './teacher-list/teacher-list.component';
+import { ClassListComponent } from './class-list/class-list.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { TestComponent } from './test/test.component';
     PracticeComponent,
     ClassComponent,
     TeacherComponent,
-    TestComponent
+    TestComponent,
+    StudentListComponent,
+    TeacherListComponent,
+    ClassListComponent
   ],
   imports: [
     BrowserModule,
