@@ -20,7 +20,12 @@
     "@angular/platform-browser-dynamic": "~11.2.4",
     "@angular/router": "~11.2.4",
     "@sweetalert2/ngx-sweetalert2": "^10.0.0",
+    "@tensorflow-models/posenet": "^2.2.2",
+    "@tensorflow/tfjs": "^3.6.0",
+    "@tensorflow/tfjs-converter": "^3.6.0",
+    "@tensorflow/tfjs-core": "^3.6.0",
     "bcryptjs": "^2.4.3",
+    "ng5-slider": "^1.2.6",
     "rxjs": "~6.6.0",
     "sweetalert2": "^11.0.16",
     "tslib": "^2.0.0",
@@ -47,5 +52,5 @@
   },
   "browser": {
     "crypto": false
-}
+  }
 }

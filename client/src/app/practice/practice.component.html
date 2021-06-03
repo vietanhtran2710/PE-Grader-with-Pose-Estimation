@@ -1,1 +1,40 @@
-<p>practice works!</p>
+<router-outlet></router-outlet>
+<div class="container">
+  <div class="jumbotron jumbotron-fluid text-center">
+    <div class="container">
+      <h1 class="display-4">{{ title }}</h1>
+    </div>
+  </div>
+  <div *ngIf="!modelLoaded" class="row">
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar">
+        <b class="progress-text">Loading Model...</b>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="modelLoaded && webBtnStatus" class="row">
+    <div class="col"></div>
+    <div class="col mb-3 text-center">
+      <button type="button" class="btn btn-danger" (click)="videoCanvasEnable = true; realTimeVideo();"><i class="fa fa-video-camera" aria-hidden="true"></i> Real Time Video </button>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row">
+    <div *ngIf="modelLoaded && imgBtnStatus" class="col mb-3 text-center">
+      <img id="image" class="img-responsive img-border" [src]="imageSrc" alt="No Image" (load)="estimate();" width="{{ imageWidth }}" height="{{ imageHeight }}" crossorigin="anonymous">
+    </div>
+    <div [hidden]="!modelLoaded || !webBtnStatus" class="col mb-3">
+      <video #videoElement class="img-border" width="{{ videoWidth }}" height="{{ videoHeight }}"></video>
+    </div>
+    <div [hidden]="!modelLoaded || videoCanvasEnable" class="col mb-3">
+      <canvas id="canvas" class="img-border" width="{{ canvasWidth }}" height="{{ canvasHeight }}"></canvas>
+    </div>
+    <div *ngIf="videoCanvasEnable" class="col mb-3">
+      <canvas id="videoCanvas" class="img-border" width="{{ canvasWidth }}" height="{{ canvasHeight }}"></canvas>
+    </div>
+    <div [hidden]="!modelLoaded" class="col mb-3">
+
+
+    </div>
+  </div>
+</div>
