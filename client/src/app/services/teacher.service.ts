@@ -22,6 +22,10 @@ export class TeacherService {
     return this.http.get(`${baseUrl}/${id}`);
   }
 
+  getByUsername(username) {
+    return this.http.get(`${baseUrl}/username/${username}`);
+  }
+
   deleteOneTeacher(id) {
     return this.http.delete(`${baseUrl}/${id}`);
   }

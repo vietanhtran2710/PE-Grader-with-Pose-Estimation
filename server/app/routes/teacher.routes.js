@@ -12,6 +12,9 @@ module.exports = app => {
 
     // Retrieve a teacher by id
     router.get("/:id", teacher.findOne);
+
+    // Retrieve a teacher by username
+    router.get("/username/:username", teacher.findByUsername);
   
     // Delete a teacher by id
     router.delete("/:id", teacher.deleteOne);

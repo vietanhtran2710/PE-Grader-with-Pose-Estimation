@@ -61,6 +61,22 @@ exports.findOne = async (req, res) => {
         });
 }
 
+exports.findByUsername = async (req, res) => {
+    const username = req.params.username;
+
+    Teacher.findOne({
+        where: { accountUsername: username}
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error retrieving teacher with username = " + username + ", " + err
+            });
+        });
+}
+
 exports.deleteOne = async (req, res) => {
     const id = req.params.id;
 
