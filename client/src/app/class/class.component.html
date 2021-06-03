@@ -26,7 +26,7 @@
   </nav>
 <div class="container">
     <div class="container-fluid p-0">
-		<h1 class="h3 mb-3">{{classInfo.subject}} - {{classInfo.id}} - {{classInfo.weekDay}} - {{classInfo.startTime}}</h1>
+		<h1 *ngIf="classLoaded" class="h3 mb-3">{{classInfo.subject}} - {{classInfo.id}} - {{classInfo.weekDay}} - {{classInfo.startTime}}</h1>
 		<div *ngIf="currentUser.accountType==roleTeacher" class="row">
 			<label for="subject">Tiêu đề bài đăng</label>
             <input type="text" class="form-control" id="subject" 
@@ -73,7 +73,7 @@
 					</div>
 					<div class="card-body">
 
-						<table class="table table-sm mt-2 mb-4">
+						<table *ngIf="teacherLoaded" class="table table-sm mt-2 mb-4">
 							<tbody>
 								<tr>
 									<th>Tên</th>
@@ -96,7 +96,7 @@
 
 						<strong>Bài đăng</strong>
 
-						<ul class="timeline mt-2 mb-0">
+						<ul *ngIf="postsLoaded" class="timeline mt-2 mb-0">
 							<li *ngFor="let post of posts" class="timeline-item">
 								<strong>{{post.postName}}</strong>
 								<span class="float-right text-muted text-sm">{{formatDate(post.updatedAt)}}</span>
