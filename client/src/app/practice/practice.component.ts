@@ -1,6 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Options, ChangeContext } from 'ng5-slider';
 import * as posenet from '@tensorflow-models/posenet';
+import pose1 from 'src/assets/pose1.json';
+import pose2 from 'src/assets/pose2.json';
+import pose3 from 'src/assets/pose3.json';
+import { ThrowStmt } from '@angular/compiler';
+import Swal from 'sweetalert2';
 
 @Component({
   templateUrl: './practice.component.html',
@@ -65,15 +70,94 @@ export class PracticeComponent implements OnInit {
   public videoCanvasEnable: boolean = true;
 
   imgSrcLists = ['assets/pose1.jpg', 'assets/pose2.jpg', 'assets/pose3.jpg'];
-  imgIndex = 2;
+  imgIndex = 0;
+  poses = []
+
+  leftArm: boolean = false;
+  rightArm: boolean = false;
+  leftLeg: boolean = false;
+  rightLeg: boolean = false;
+  upLeftArm: boolean = false;
+  upRightArm: boolean = false;
+  upLeftLeg: boolean = false;
+  upRightLeg: boolean = false;
+  leanRight: boolean = false;
+  leanLeft: boolean = false;
 
   public async ngOnInit() {
+
     this.model = await posenet.load();
     this.modelLoaded = true;
+    this.loadPose();
     setTimeout(() => {
       this.setSliderConfig();
     }, 1000);
     this.videoMode();
+  }
+
+  public getPose(pose) {
+    return {
+      leftArm: this.angle(
+        pose[5].position.x, pose[5].position.y,
+        pose[7].position.x, pose[7].position.y,
+        pose[9].position.x, pose[9].position.y),
+      rightArm: this.angle(
+        pose[6].position.x, pose[6].position.y,
+        pose[8].position.x, pose[8].position.y,
+        pose[10].position.x, pose[10].position.y),
+      leftLeg: this.angle(
+        pose[11].position.x, pose[11].position.y,
+        pose[13].position.x, pose[13].position.y,
+        pose[15].position.x, pose[15].position.y),
+      rightLeg: this.angle(
+        pose[12].position.x, pose[12].position.y,
+        pose[14].position.x, pose[14].position.y,
+        pose[16].position.x, pose[16].position.y),
+      upLeftArm: this.angle(
+        pose[11].position.x, pose[11].position.y,
+        pose[5].position.x, pose[5].position.y,
+        pose[7].position.x, pose[7].position.y),
+      upRightArm: this.angle(
+        pose[12].position.x, pose[12].position.y,
+        pose[6].position.x, pose[6].position.y,
+        pose[8].position.x, pose[8].position.y),
+      upLeftLeg: this.angle(
+        pose[12].position.x, pose[12].position.y,
+        pose[11].position.x, pose[11].position.y,
+        pose[13].position.x, pose[13].position.y),
+      upRightLeg: this.angle(
+        pose[11].position.x, pose[11].position.y,
+        pose[12].position.x, pose[12].position.y,
+        pose[14].position.x, pose[14].position.y),
+      leanLeft: this.angle(
+        pose[11].position.x, pose[11].position.y,
+        pose[12].position.x, pose[12].position.y,
+        pose[6].position.x, pose[6].position.y),
+      leanRight: this.angle(
+        pose[12].position.x, pose[12].position.y,
+        pose[11].position.x, pose[11].position.y,
+        pose[5].position.x, pose[5].position.y)
+    }
+  }
+
+  public loadPose() {
+    console.log(pose1)
+    this.poses.push(this.getPose(pose1));
+    this.poses.push(this.getPose(pose2));
+    this.poses.push(this.getPose(pose3));
+    console.log(this.poses);
+  }
+
+  public angle(xa, ya, xb, yb, xc, yc) {
+    let ab = this.length(xa, ya, xb, yb);
+    let bc = this.length(xb, yb, xc, yc);
+    let ac = this.length(xa, ya, xc, yc);
+    let temp = (ab * ab + bc * bc - ac * ac) / (2 * ab * bc)
+    return Math.acos(temp) / Math.PI * 180
+  }
+
+  public length(point1_x, point1_y, point2_x, point2_y) {
+    return Math.sqrt((point1_x - point2_x) * (point1_x - point2_x) + (point1_y - point2_y) * (point1_y - point2_y))
   }
 
   public videoMode() {
@@ -147,7 +231,8 @@ export class PracticeComponent implements OnInit {
           flipHorizontal: this.flipHorizontal,
           decodingMethod: 'single-person'
         });
-        console.log(this.singlePose[0]);
+        console.log(this.singlePose)
+        this.calculateAndUpdate(this.singlePose[0].keypoints);
         this.renderSinglePoseResult();
       }
       this.animationFrame = requestAnimationFrame(() => {
@@ -214,6 +299,87 @@ export class PracticeComponent implements OnInit {
     this.canvasContext.clearRect(0, 0, 400, 300);
     this.canvasContext.drawImage(this.imageElement, 0, 0, 400, 300);
     this.drawSinglePoseResult();
+  }
+
+  public calculateAndUpdate(curPose) {
+    let curAngle = this.getPose(curPose);
+    if (Math.abs(curAngle.leanLeft - this.poses[this.imgIndex].leanLeft) > 20) {
+      this.leanLeft = true;
+    }
+    else {
+      this.leanLeft = false;
+    }
+    if (Math.abs(curAngle.leanRight - this.poses[this.imgIndex].leanRight) > 20) {
+      this.leanRight = true;
+    }
+    else {
+      this.leanRight = false;
+    }
+    if (Math.abs(curAngle.leftArm - this.poses[this.imgIndex].leftArm) > 20) {
+      this.leftArm = true;
+    }
+    else {
+      this.leftArm = false;
+    }
+    if (Math.abs(curAngle.rightArm - this.poses[this.imgIndex].rightArm) > 20) {
+      this.rightArm = true;
+    }
+    else {
+      this.rightArm = false;
+    }
+    if (Math.abs(curAngle.leftLeg - this.poses[this.imgIndex].leftLeg) > 20) {
+      this.leftLeg = true;
+    }
+    else {
+      this.leftLeg = false;
+    }
+    if (Math.abs(curAngle.upLeftArm - this.poses[this.imgIndex].upLeftArm) > 20) {
+      this.upLeftArm = true;
+    }
+    else {
+      this.upLeftArm = false;
+    }
+    if (Math.abs(curAngle.upRightArm - this.poses[this.imgIndex].upRightArm) > 20) {
+      this.upRightArm = true;
+    }
+    else {
+      this.upRightArm = false;
+    }
+    if (Math.abs(curAngle.upLeftLeg - this.poses[this.imgIndex].upLeftLeg) > 20) {
+      this.upLeftLeg = true;
+    }
+    else {
+      this.upLeftLeg = false;
+    }
+    if (Math.abs(curAngle.upRightLeg - this.poses[this.imgIndex].upRightLeg) > 20) {
+      this.upRightLeg = true;
+    }
+    else {
+      this.upRightLeg = false;
+    }
+    if (Math.abs(curAngle.rightLeg - this.poses[this.imgIndex].rightLeg) > 20) {
+      this.rightLeg = true;
+    }
+    else {
+      this.rightLeg = false;
+    }
+    if (!this.leanLeft && !this.leanLeft && !this.leftArm && !this.rightArm &&
+        !this.leftLeg && !this.rightLeg && !this.upLeftArm && !this.upRightArm &&
+        !this.upLeftLeg && !this.upRightLeg) {
+          this.imgIndex++;
+          if (this.imgIndex == 3) {
+            Swal.fire({
+              title: 'Đã hoàn thành bài tập',
+              confirmButtonText: `OK`,
+              icon: 'info'
+            }).then((result) => {
+              location.reload();
+            })
+          }
+          else {
+            this.imageSrc = this.imgSrcLists[this.imgIndex];
+          }
+        }
   }
 
   public async drawSinglePoseResult() {

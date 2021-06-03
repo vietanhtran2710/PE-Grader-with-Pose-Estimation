@@ -34,14 +34,16 @@
 
     </div>
     <div [hidden]="!modelLoaded" class="col mb-3">
-      <h1>Goc 1</h1>
-      <h1>Goc 2</h1>
-      <h1>Goc 3</h1>
-      <h1>Goc 4</h1>
-      <h1>Goc 5</h1>
-      <h1>Goc 6</h1>
-      <h1>Goc 7</h1>
-      <h1>Goc 8</h1>
+      <h4 *ngIf="leftArm">Tay trái chưa chuẩn</h4>
+      <h4 *ngIf="rightArm">Tay phải chưa chuẩn</h4>
+      <h4 *ngIf="leftLeg">Chân trái chưa chuẩn</h4>
+      <h4 *ngIf="rightLeg">Chân phải chưa chuẩn</h4>
+      <h4 *ngIf="upLeftArm">Tay trái dang rộng chưa chuẩn</h4>
+      <h4 *ngIf="upRightArm">Tay phải dang rộng chưa chuẩn</h4>
+      <h4 *ngIf="upLeftLeg">Chân trái dang rộng chưa chuẩn</h4>
+      <h4 *ngIf="upRightLeg">Chân phải dang rộng chưa chuẩn</h4>
+      <h4 *ngIf="leanLeft">Độ nghiêng sang trái chưa chuẩn</h4>
+      <h4 *ngIf="leanRight">Độ nghiêng sang phải chưa chuẩn</h4>
     </div>
   </div>
 </div>
