@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { TeacherService } from 'src/app/services/teacher.service'
-import { StudentService } from 'src/app/services/student.service'
-import { ClassService } from 'src/app/services/class.service'
-import { AccountService } from 'src/app/services/account.service'
+import { TeacherService } from 'src/app/services/teacher.service';
+import { StudentService } from 'src/app/services/student.service';
+import { ClassService } from 'src/app/services/class.service';
+import { AccountService } from 'src/app/services/account.service';
+import { AuthService} from 'src/app/services/auth.service';
 
 @Component({
   templateUrl: './admin.component.html',
@@ -39,7 +40,8 @@ export class AdminComponent implements OnInit {
   constructor(private studentService: StudentService,
               private teacherService: TeacherService,
               private classService: ClassService,
-              private accountService: AccountService) { }
+              private accountService: AccountService,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
 
@@ -79,6 +81,10 @@ export class AdminComponent implements OnInit {
 
   createClass() {
     console.log(this.classData);
+  }
+
+  logOut() {
+    this.authService.logout();
   }
 
 }
