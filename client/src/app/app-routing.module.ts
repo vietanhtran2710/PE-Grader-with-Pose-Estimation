@@ -6,10 +6,12 @@ import { HomeComponent} from './home/home.component'
 import { PracticeComponent } from './practice/practice.component';
 import { ClassComponent } from './class/class.component';
 import { TeacherComponent } from './teacher/teacher.component';
+import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'practice', component: PracticeComponent},
+  { path: 'test', component: TestComponent},
   {
     path: 'login', component: LoginComponent
   },
