@@ -116,10 +116,11 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="teacherFile">Chọn file dữ liệu</label>
-                            <input type="file" class="form-control-file" id="teacherFile" />
+                            <input type="file" #teacherReader class="form-control-file" id="teacherFile" 
+                            (change)="teacherUploadListener($event)" accept=".csv"/>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary">Tạo tài khoản hàng loạt</button>
+                            <button type="submit" (click)="createManyTeacher()" class="btn btn-primary">Tạo tài khoản hàng loạt</button>
                         </div>
                         <div>
                             <button type="submit" class="btn btn-secondary">Xem danh sách giáo viên</button>
@@ -174,7 +175,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="teacherFile">Chọn file danh sách lớp</label>
-                            <input type="file" class="form-control-file" id="teacherFile" />
+                            <input type="file" #studentListReader class="form-control-file" id="classFile" 
+                            (change)="studentListUploadListener($event)" accept=".csv"/>
                         </div>
                         <div>
                             <button type="submit" (click)="createClass()" class="btn btn-primary">Tạo lớp học</button>
