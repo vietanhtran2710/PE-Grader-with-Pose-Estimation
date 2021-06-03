@@ -22,7 +22,7 @@ export class AdminComponent implements OnInit {
   }
 
   teacherData = {
-    accountUsername: '',
+    username: '',
     fullName: '',
     email: '',
     phoneNumber: '',
@@ -77,6 +77,28 @@ export class AdminComponent implements OnInit {
 
   createTeacher() {
     console.log(this.teacherData);
+    let accountData = {
+      username: this.teacherData.username,
+      password: this.teacherData.username,
+      accountType: "teacher"
+    }
+    this.accountService.createAccount(accountData)
+      .subscribe(
+        data => {
+          this.teacherService.createTeacher(this.teacherData)
+            .subscribe(
+              data => {
+                console.log("Created teacher successfully");
+              },
+              error => {
+                console.log(error);
+              }
+            )
+        },
+        error => {
+          console.log(error);
+        }
+      )
   }
 
   createClass() {

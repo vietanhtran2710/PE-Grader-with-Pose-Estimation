@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
           this.router.navigate(['/admin']);
         }
         else {
-
+          this.router.navigate([`teacher/${this.authService.currentUserValue.username}`]);
         }
     }
   }

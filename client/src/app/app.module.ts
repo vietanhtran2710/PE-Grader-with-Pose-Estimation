@@ -13,6 +13,7 @@ import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './home/home.component';
 import { PracticeComponent } from './practice/practice.component';
 import { ClassComponent } from './class/class.component';
+import { TeacherComponent } from './teacher/teacher.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ClassComponent } from './class/class.component';
     AdminComponent,
     HomeComponent,
     PracticeComponent,
-    ClassComponent
+    ClassComponent,
+    TeacherComponent
   ],
   imports: [
     BrowserModule,
