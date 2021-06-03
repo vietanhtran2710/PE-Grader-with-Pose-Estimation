@@ -147,7 +147,7 @@
                         <div class="form-group">
                             <label for="classday">Ngày học</label>
                             <select class="form-control" id="classday"
-                            [(ngModel)]=classData.day #classDay="ngModel" name="classDay">
+                            [(ngModel)]=classData.weekDay #classDay="ngModel" name="classDay">
                                 <option></option>
                                 <option>Thứ hai</option>
                                 <option>Thứ ba</option>
@@ -161,14 +161,13 @@
                         <div class="form-group">
                             <label for="classtime">Giờ học</label>
                             <input type="time" class="form-control" id="classtime" 
-                            [(ngModel)]=classData.time #classTime="ngModel" name="classTime"/>
+                            [(ngModel)]=classData.startTime #classTime="ngModel" name="classTime"/>
                         </div>
                         <div class="form-group">
                             <label for="teacher">Giáo viên</label>
                             <select class="form-control" id="teacher"
                             [(ngModel)]=classData.teacherName #classTeacher="ngModel" name="classTeacher">
-                                <option>1</option>
-                                <option>2</option>
+                                <option *ngFor = "let teacher of teachers">{{teacher.fullName}}</option>
                             </select>
                         </div>
                     </div>

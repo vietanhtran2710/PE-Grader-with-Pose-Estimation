@@ -36,14 +36,16 @@ export class AdminComponent implements OnInit {
   classData = {
     id: '',
     subject: '',
-    day: '',
-    time: '',
-    teacherName: ''
+    weekDay: '',
+    startTime: '',
+    teacherName: '',
+    teacherId: ''
   }
 
   public studentRecords: any[] = [];
   public teacherRecords: any[] = [];
   public studentListRecords: any[] = [];
+  public teachers: any;
   @ViewChild('studentReader') studentReader: any; 
   @ViewChild('teacherReader') teacherReader: any; 
   @ViewChild('studentListReader') studentListReader: any; 
@@ -55,7 +57,16 @@ export class AdminComponent implements OnInit {
               private authService: AuthService) { }
 
   ngOnInit(): void {
-    
+    this.teacherService.getAllTeachers()
+      .subscribe(
+        data => {
+          console.log(data);
+          this.teachers = data;
+        },
+        error => {
+            console.log(error);
+        }
+      )
   }
 
   studentUploadListener($event: any): void {  
@@ -353,8 +364,32 @@ export class AdminComponent implements OnInit {
   }
 
   createClass() {
-    console.log(this.classData);
     console.log(this.studentListRecords);
+    for (let teacher of this.teachers) {
+      if (teacher.fullName == this.classData.teacherName) {
+        this.classData.teacherId = teacher.id;
+      }
+    }
+    console.log(this.classData);
+    this.classService.createClass(this.classData)
+      .subscribe(
+        data => {
+          for (let studentId of this.studentListRecords) {
+            this.studentService.updateStudent(studentId.id, { classId: this.classData.id})
+              .subscribe(
+                data => {
+                  console.log("Student added to list");
+                },
+                error => {
+                  console.log(error);
+                }
+              )
+          }
+        },
+        error => {
+
+        }
+      )
   }
 
   logOut() {
