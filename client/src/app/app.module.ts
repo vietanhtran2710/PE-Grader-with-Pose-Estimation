@@ -11,6 +11,8 @@ import { LoginComponent } from './login/login.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './home/home.component';
+import { PracticeComponent } from './practice/practice.component';
+import { ClassComponent } from './class/class.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { HomeComponent } from './home/home.component';
     FooterComponent,
     LoginComponent,
     AdminComponent,
-    HomeComponent
+    HomeComponent,
+    PracticeComponent,
+    ClassComponent
   ],
   imports: [
     BrowserModule,

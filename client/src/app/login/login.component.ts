@@ -56,7 +56,6 @@ export class LoginComponent implements OnInit {
       return throwError(err);
     })).subscribe(data => {
       if (data.token) {
-        // this.accountService.updateAccount(data.username, { online: true }).subscribe(data => this.router.navigate([this.returnUrl]))
         this.accountService.updateAccount(data.username, { online: true }).subscribe(
           data => {
             console.log(this.returnUrl)

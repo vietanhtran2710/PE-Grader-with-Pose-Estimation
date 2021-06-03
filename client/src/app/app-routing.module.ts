@@ -3,11 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent} from './home/home.component'
+import { PracticeComponent } from './practice/practice.component';
+import { ClassComponent } from './class/class.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'practice', component: PracticeComponent},
   {
     path: 'login', component: LoginComponent
+  },
+  {
+    path: 'class/:id', component: ClassComponent
   },
   {
     path: 'admin', component: AdminComponent
