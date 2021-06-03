@@ -10,25 +10,11 @@ export class PracticeComponent implements OnInit {
 
   constructor() { }
 
-  public architectureArray: Array<object> = [
-    { 'name': 'MobileNet V1', 'value': 'MobileNetV1' },
-    { 'name': 'ResNet 50', 'value': 'ResNet50' }
-  ];
   public architecture: any = 'ResNet50';
-  public multiplierArray: Array<number> = [ 1.01, 1.00, 0.75, 0.50 ];
   public multiplier: any = 1.00;
-  public outputStrideArc1Array: Array<number> = [ 8, 16 ];
-  public outputStrideArc2Array: Array<number> = [ 16, 32 ];
   public outputStride: any = 8;
-  public inputResolutionArc1Array: Array<number> = [ 161, 193, 257, 289, 321, 353, 385, 417, 449, 481, 513 ];
-  public inputResolutionArc2Array: Array<number> = [ 257, 513 ];
   public inputResolution: any = 257;
-  public quantBytesArray: Array<number> = [ 1, 2, 4 ];
   public quantBytes: any = 2;
-  public poseArray: Array<object> = [
-    { 'name': 'Single Person', 'value': 'single-person' },
-    { 'name': 'Multi Person', 'value': 'multi-person' }
-  ];
   public pose: string = 'single-person';
   public singlePose: any;
   public multiplePose: any;
@@ -57,7 +43,7 @@ export class PracticeComponent implements OnInit {
   public imgBtnStatus: boolean = true;
   public webBtnStatus: boolean = false;
   public imageElement: any;
-  public imageSrc: any = 'assets/backpackman.jpg';
+  public imageSrc: any = 'assets/pose1.jpg';
   public imageWidth: number = 410;
   public imageHeight: number = 310;
   @ViewChild('videoElement', {static: false}) videoElement: ElementRef;
@@ -87,28 +73,12 @@ export class PracticeComponent implements OnInit {
     this.videoMode();
   }
 
-  public imageMode() {
-    if (this.webBtnStatus) {
-      this.stopVideo();
-      cancelAnimationFrame(this.animationFrame);
-      this.videoCanvasEnable = false;
-      this.imageSrc = '';
-      this.imageSrc = 'assets/white.jpg';
-      this.imgBtnStatus = true;
-      this.webBtnStatus = false;
-      this.snapData = null;
-      this.canvas = document.getElementById("canvas");
-      this.canvasContext = this.canvas.getContext("2d");
-      this.canvasContext.clearRect(0, 0, 400, 300);
-    }
-  }
-
   public videoMode() {
     if (this.imgBtnStatus) {
       cancelAnimationFrame(this.animationFrame);
       this.videoCanvasEnable = true;
       this.fileName = 'No File Chosen';
-      this.imageSrc = 'assets/white.jpg';
+      //this.imageSrc = 'assets/white.jpg';
       this.webBtnStatus = true;
       this.imgBtnStatus = false;
       this.snapData = null;
@@ -174,6 +144,7 @@ export class PracticeComponent implements OnInit {
           flipHorizontal: this.flipHorizontal,
           decodingMethod: 'single-person'
         });
+        console.log(this.singlePose[0]);
         this.renderSinglePoseResult();
       }
       this.animationFrame = requestAnimationFrame(() => {

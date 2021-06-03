@@ -15,14 +15,11 @@
   <div *ngIf="modelLoaded && webBtnStatus" class="row">
     <div class="col"></div>
     <div class="col mb-3 text-center">
-      <button type="button" class="btn btn-danger" (click)="videoCanvasEnable = true; realTimeVideo();"><i class="fa fa-video-camera" aria-hidden="true"></i> Real Time Video </button>
+      <button type="button" class="btn btn-danger" (click)="videoCanvasEnable = true; realTimeVideo();"><i class="fa fa-video-camera" aria-hidden="true"></i> Bắt đầu </button>
     </div>
     <div class="col"></div>
   </div>
   <div class="row">
-    <div *ngIf="modelLoaded && imgBtnStatus" class="col mb-3 text-center">
-      <img id="image" class="img-responsive img-border" [src]="imageSrc" alt="No Image" (load)="estimate();" width="{{ imageWidth }}" height="{{ imageHeight }}" crossorigin="anonymous">
-    </div>
     <div [hidden]="!modelLoaded || !webBtnStatus" class="col mb-3">
       <video #videoElement class="img-border" width="{{ videoWidth }}" height="{{ videoHeight }}"></video>
     </div>
@@ -33,8 +30,18 @@
       <canvas id="videoCanvas" class="img-border" width="{{ canvasWidth }}" height="{{ canvasHeight }}"></canvas>
     </div>
     <div [hidden]="!modelLoaded" class="col mb-3">
+      <img id="image" class="img-responsive img-border" [src]="imageSrc" alt="No Image" width="{{ imageWidth }}" height="{{ imageHeight }}" crossorigin="anonymous">
 
-
+    </div>
+    <div [hidden]="!modelLoaded" class="col mb-3">
+      <h1>Goc asldkfjlaskdjf </h1>
+      <h1>Goc asldkfjlaskdjf </h1>
+      <h1>Goc asldkfjlaskdjf </h1>
+      <h1>Goc asldkfjlaskdjf </h1>
+      <h1>Goc asldkfjlaskdjf </h1>
+      <h1>Goc asldkfjlaskdjf </h1>
+      <h1>Goc asldkfjlaskdjf </h1>
+      <h1>Goc asldkfjlaskdjf </h1>
     </div>
   </div>
 </div>
