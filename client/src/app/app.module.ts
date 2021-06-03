@@ -32,7 +32,7 @@ import { TeacherComponent } from './teacher/teacher.component';
     FormsModule,
     ReactiveFormsModule,
     SweetAlert2Module.forRoot(),
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

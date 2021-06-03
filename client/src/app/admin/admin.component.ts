@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TeacherService } from 'src/app/services/teacher.service';
 import { StudentService } from 'src/app/services/student.service';
 import { ClassService } from 'src/app/services/class.service';
 import { AccountService } from 'src/app/services/account.service';
-import { AuthService} from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { StudentRecord } from 'src/app/_model/studentModel';  
 
 @Component({
   templateUrl: './admin.component.html',
@@ -37,6 +38,9 @@ export class AdminComponent implements OnInit {
     teacherName: ''
   }
 
+  public records: any[] = [];
+  @ViewChild('studentReader') studentReader: any; 
+
   constructor(private studentService: StudentService,
               private teacherService: TeacherService,
               private classService: ClassService,
@@ -44,7 +48,110 @@ export class AdminComponent implements OnInit {
               private authService: AuthService) { }
 
   ngOnInit(): void {
+    
+  }
 
+  studentUploadListener($event: any): void {  
+  
+    let text = [];  
+    let files = $event.srcElement.files;  
+  
+    if (this.isValidCSVFile(files[0])) {  
+  
+      let input = $event.target;  
+      let reader = new FileReader();  
+      reader.readAsText(input.files[0]);  
+  
+      reader.onload = () => {  
+        let csvData = reader.result;  
+        let csvRecordsArray = (<string>csvData).split(/\r\n|\n/);  
+  
+        let headersRow = this.getHeaderArray(csvRecordsArray);  
+  
+        this.records = this.getStudentRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);  
+      };  
+  
+      reader.onerror = function () {  
+        console.log('error is occured while reading file!');  
+      };  
+  
+    } else {  
+      alert("Please import valid .csv file.");  
+      this.fileReset();  
+    }  
+  }
+
+  getStudentRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any) {  
+    let csvArr = [];  
+  
+    for (let i = 1; i < csvRecordsArray.length; i++) {  
+      let curruntRecord = (<string>csvRecordsArray[i]).split(',');  
+      if (curruntRecord.length == headerLength) {  
+        let csvRecord: StudentRecord = new StudentRecord();  
+        csvRecord.id = curruntRecord[0].trim();  
+        csvRecord.fullName = curruntRecord[1].trim();  
+        csvRecord.university = curruntRecord[2].trim();  
+        csvRecord.phoneNumber = curruntRecord[3].trim();  
+        csvRecord.dateOfBirth = curruntRecord[4].trim();  
+        csvArr.push(csvRecord);  
+      }  
+    }  
+    return csvArr;  
+  }  
+  
+  isValidCSVFile(file: any) {  
+    return file.name.endsWith(".csv");  
+  }  
+  
+  getHeaderArray(csvRecordsArr: any) {  
+    let headers = (<string>csvRecordsArr[0]).split(',');  
+    let headerArray = [];  
+    for (let j = 0; j < headers.length; j++) {  
+      headerArray.push(headers[j]);  
+    }  
+    return headerArray;  
+  }  
+  
+  fileReset() {  
+    this.studentReader.nativeElement.value = "";  
+    this.records = [];  
+  }
+
+  createManyStudent() {
+    console.log(this.records);
+    for (let student of this.records) {
+      let _student = {
+        username: student.id,
+        email: student.id + "@vnu.edu.vn",
+        id: student.id,
+        fullName: student.fullName,
+        university: student.university,
+        phoneNumber: student.phoneNumber,
+        dateOfBirth: student.dateOfBirth
+      }
+      let account = {
+        username: _student.id,
+        password: _student.id,
+        accountType: "student"
+      }
+      this.accountService.createAccount(account)
+      .subscribe(
+        data => {
+          this.studentService.createStudent(_student)
+            .subscribe(
+              data => {
+                console.log("Created student successfully");
+              },
+              error => {
+                console.log(error);
+              }
+            )
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    }
   }
 
   createStudent() {

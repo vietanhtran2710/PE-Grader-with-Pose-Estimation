@@ -19,7 +19,7 @@
 </nav>
 <div class="container">
 <div class="row justify-content-center">
-    <div class="col-12 col-lg-12 col-xl-12 mx-auto">
+    <div class="col-12 col-lg-12 col-xl-12 ">
         <!-- Image and text -->
         <div class="my-4">
             <form>
@@ -69,10 +69,10 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="file">Chọn file dữ liệu</label>
-                            <input type="file" class="form-control-file" id="file" />
+                            <input type="file" #studentReader class="form-control-file" id="file" (change)="studentUploadListener($event)" accept=".csv"/>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary">Tạo tài khoản hàng loạt</button>
+                            <button type="submit" (click)="createManyStudent()" class="btn btn-primary">Tạo tài khoản hàng loạt</button>
                         </div>
                         <div>
                             <button type="submit" class="btn btn-secondary">Xem danh sách sinh viên</button>
