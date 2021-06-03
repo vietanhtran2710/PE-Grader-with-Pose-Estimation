@@ -85,7 +85,6 @@ export class PracticeComponent implements OnInit {
   leanLeft: boolean = false;
 
   public async ngOnInit() {
-
     this.model = await posenet.load();
     this.modelLoaded = true;
     this.loadPose();
