@@ -5,6 +5,7 @@ import { ClassService } from 'src/app/services/class.service';
 import { StudentService } from 'src/app/services/student.service'; 
 import { TeacherService } from 'src/app/services/teacher.service';
 import { PostService } from 'src/app/services/post.service';
+import Swal from 'sweetalert2';
 
 @Component({
   templateUrl: './class.component.html',
@@ -94,7 +95,6 @@ export class ClassComponent implements OnInit {
 
   logOut() {
     this.authService.logout();
-    console.log("clicked");
   }
 
   createPost() {
@@ -104,10 +104,23 @@ export class ClassComponent implements OnInit {
     this.postService.createPost(this.postData)
       .subscribe(
         data => {
-          console.log("Done");
+          Swal.fire({
+            icon: 'success',
+            title: `Tạo bài đăng thành công`,
+            showConfirmButton: true,
+          }).then((result) => {
+              location.reload();
+            });
         },
         error => {
-          console.log("Error");
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Đã xảy ra lỗi',
+            text: 'Chúng tôi sẽ khắc phục sớm nhất có thể',
+            showConfirmButton: false,
+            timer: 5500
+          })
         }
       )
   }

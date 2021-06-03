@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { StudentRecord } from 'src/app/_model/studentModel';
 import { TeacherRecord } from 'src/app/_model/teacherModel';  
 import { StudentListRecord } from 'src/app/_model/studentListModel';  
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -62,9 +63,17 @@ export class AdminComponent implements OnInit {
         data => {
           console.log(data);
           this.teachers = data;
+          this.classData.teacherName = data[0].name;
         },
         error => {
-            console.log(error);
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Đã xảy ra lỗi',
+            text: 'Chúng tôi sẽ khắc phục sớm nhất có thể',
+            showConfirmButton: false,
+            timer: 5500
+          })
         }
       )
   }
@@ -90,11 +99,25 @@ export class AdminComponent implements OnInit {
       };  
   
       reader.onerror = function () {  
-        console.log('error is occured while reading file!');  
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Đã xảy ra lỗi',
+          text: 'Lỗi khi đọc file CSV',
+          showConfirmButton: false,
+          timer: 5500
+        })  
       };  
   
     } else {  
-      alert("Please import valid .csv file.");  
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Sai định dạng tệp',
+        text: 'Vui lòng chọn tệp đuôi .csv',
+        showConfirmButton: false,
+        timer: 5500
+      })
       this.studentFileReset();  
     }  
   }
@@ -120,11 +143,25 @@ export class AdminComponent implements OnInit {
       };  
   
       reader.onerror = function () {  
-        console.log('error is occured while reading file!');  
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Đã xảy ra lỗi',
+          text: 'Lỗi khi đọc file CSV',
+          showConfirmButton: false,
+          timer: 5500
+        })  
       };  
   
     } else {  
-      alert("Please import valid .csv file.");  
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Sai định dạng tệp',
+        text: 'Vui lòng chọn tệp đuôi .csv',
+        showConfirmButton: false,
+        timer: 5500
+      })  
       this.teacherFileReset();  
     }  
   }
@@ -146,15 +183,30 @@ export class AdminComponent implements OnInit {
   
         let headersRow = this.getHeaderArray(csvRecordsArray);  
   
-        this.studentListRecords = this.getStudentListRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);  
+        this.studentListRecords = this.getStudentListRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+        console.log("asdfasdf", this.studentListRecords.length);  
       };  
   
       reader.onerror = function () {  
-        console.log('error is occured while reading file!');  
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Đã xảy ra lỗi',
+          text: 'Lỗi khi đọc file CSV',
+          showConfirmButton: false,
+          timer: 5500
+        }) 
       };  
   
     } else {  
-      alert("Please import valid .csv file.");  
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Sai định dạng tệp',
+        text: 'Vui lòng chọn tệp đuôi .csv',
+        showConfirmButton: false,
+        timer: 5500
+      })  
       this.studentListFileReset();  
     }  
   }
@@ -238,6 +290,8 @@ export class AdminComponent implements OnInit {
   }
 
   createManyStudent() {
+    let studentNumber = this.studentRecords.length;
+    let created = 0;
     console.log(this.studentRecords);
     for (let student of this.studentRecords) {
       let _student = {
@@ -260,15 +314,36 @@ export class AdminComponent implements OnInit {
           this.studentService.createStudent(_student)
             .subscribe(
               data => {
-                console.log("Created student successfully");
+                created++;
+                if (created == studentNumber) {
+                  Swal.fire({
+                    icon: 'success',
+                    title: `Tạo ${created} tài khoản sinh viên thành công`,
+                    showConfirmButton: true,
+                  })
+                }
               },
               error => {
-                console.log(error);
+                Swal.fire({
+                  position: 'top-end',
+                  icon: 'error',
+                  title: 'Đã xảy ra lỗi',
+                  text: 'Chúng tôi sẽ khắc phục sớm nhất có thể',
+                  showConfirmButton: false,
+                  timer: 5500
+                })
               }
             )
         },
         error => {
-          console.log(error);
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Đã xảy ra lỗi',
+            text: 'Chúng tôi sẽ khắc phục sớm nhất có thể',
+            showConfirmButton: false,
+            timer: 5500
+          })
         }
       )
     }
@@ -289,20 +364,40 @@ export class AdminComponent implements OnInit {
           this.studentService.createStudent(this.studentData)
             .subscribe(
               data => {
-                console.log("Created student successfully");
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Tạo tài khoản sinh viên thành công',
+                  showConfirmButton: true,
+                })
               },
               error => {
-                console.log(error);
+                Swal.fire({
+                  position: 'top-end',
+                  icon: 'error',
+                  title: 'Đã xảy ra lỗi',
+                  text: 'Chúng tôi sẽ khắc phục sớm nhất có thể',
+                  showConfirmButton: false,
+                  timer: 5500
+                })
               }
             )
         },
         error => {
-          console.log(error);
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Đã xảy ra lỗi',
+            text: 'Chúng tôi sẽ khắc phục sớm nhất có thể',
+            showConfirmButton: false,
+            timer: 5500
+          })
         }
       )
   }
 
   createManyTeacher() {
+    let teacherNumber = this.teacherRecords.length;
+    let created = 0;
     console.log(this.teacherRecords);
     for (let teacher of this.teacherRecords) {
       let accountData = {
@@ -323,15 +418,36 @@ export class AdminComponent implements OnInit {
           this.teacherService.createTeacher(_teacher)
             .subscribe(
               data => {
-                console.log("Created teacher successfully");
+                created++;
+                if (created == teacherNumber) {
+                  Swal.fire({
+                    icon: 'success',
+                    title: `Tạo ${created} tài khoản giáo viên thành công`,
+                    showConfirmButton: true,
+                  })
+                }
               },
               error => {
-                console.log(error);
+                Swal.fire({
+                  position: 'top-end',
+                  icon: 'error',
+                  title: 'Đã xảy ra lỗi',
+                  text: 'Chúng tôi sẽ khắc phục sớm nhất có thể',
+                  showConfirmButton: false,
+                  timer: 5500
+                })
               }
             )
         },
         error => {
-          console.log(error);
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Đã xảy ra lỗi',
+            text: 'Chúng tôi sẽ khắc phục sớm nhất có thể',
+            showConfirmButton: false,
+            timer: 5500
+          })
         }
       )
     }
@@ -350,20 +466,40 @@ export class AdminComponent implements OnInit {
           this.teacherService.createTeacher(this.teacherData)
             .subscribe(
               data => {
-                console.log("Created teacher successfully");
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Tạo tài khoản giáo viên thành công',
+                  showConfirmButton: true,
+                })
               },
               error => {
-                console.log(error);
+                Swal.fire({
+                  position: 'top-end',
+                  icon: 'error',
+                  title: 'Đã xảy ra lỗi',
+                  text: 'Chúng tôi sẽ khắc phục sớm nhất có thể',
+                  showConfirmButton: false,
+                  timer: 5500
+                })
               }
             )
         },
         error => {
-          console.log(error);
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Đã xảy ra lỗi',
+            text: 'Chúng tôi sẽ khắc phục sớm nhất có thể',
+            showConfirmButton: false,
+            timer: 5500
+          })
         }
       )
   }
 
   createClass() {
+    let studentNumber = this.studentListRecords.length;
+    let created = 0;
     console.log(this.studentListRecords);
     for (let teacher of this.teachers) {
       if (teacher.fullName == this.classData.teacherName) {
@@ -378,16 +514,37 @@ export class AdminComponent implements OnInit {
             this.studentService.updateStudent(studentId.id, { classId: this.classData.id})
               .subscribe(
                 data => {
-                  console.log("Student added to list");
+                  created++;
+                  if (created == studentNumber) {
+                    Swal.fire({
+                      icon: 'success',
+                      title: `Tạo lớp thành công với ${created} sinh viên`,
+                      showConfirmButton: true,
+                    })
+                  }
                 },
                 error => {
-                  console.log(error);
+                  Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Đã xảy ra lỗi',
+                    text: 'Chúng tôi sẽ khắc phục sớm nhất có thể',
+                    showConfirmButton: false,
+                    timer: 5500
+                  })
                 }
               )
           }
         },
         error => {
-
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Đã xảy ra lỗi',
+            text: 'Chúng tôi sẽ khắc phục sớm nhất có thể',
+            showConfirmButton: false,
+            timer: 5500
+          })
         }
       )
   }
