@@ -6,8 +6,11 @@ import { AccountService } from 'src/app/services/account.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { StudentRecord } from 'src/app/_model/studentModel';
 import { TeacherRecord } from 'src/app/_model/teacherModel';  
-import { StudentListRecord } from 'src/app/_model/studentListModel';  
+import { StudentListRecord } from 'src/app/_model/studentListModel';
+import { Router } from '@angular/router'
+
 import Swal from 'sweetalert2';
+import { computeOptimalWindowSize } from '@tensorflow/tfjs-core/dist/ops/reduce_util';
 
 
 @Component({
@@ -55,7 +58,8 @@ export class AdminComponent implements OnInit {
               private teacherService: TeacherService,
               private classService: ClassService,
               private accountService: AccountService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private router: Router,) { }
 
   ngOnInit(): void {
     this.teacherService.getAllTeachers()
@@ -547,6 +551,18 @@ export class AdminComponent implements OnInit {
           })
         }
       )
+  }
+
+  openTeachersList() {
+    this.router.navigate(['admin/teacherslist'])
+  }
+
+  openStudentsList() {
+    this.router.navigate(['admin/studentslist'])
+  }
+
+  openClassesList() {
+    this.router.navigate(['admin/classeslist'])
   }
 
   logOut() {
